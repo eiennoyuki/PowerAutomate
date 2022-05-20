@@ -1,0 +1,167 @@
+{
+  "name": "a4719bf3-48f2-4eb6-aa39-318afec6e03c",
+  "id": "/providers/Microsoft.Flow/flows/a4719bf3-48f2-4eb6-aa39-318afec6e03c",
+  "type": "Microsoft.Flow/flows",
+  "properties": {
+    "apiId": "/providers/Microsoft.PowerApps/apis/shared_logicflows",
+    "displayName": "LAX- Archive Lost Found",
+    "definition": {
+      "metadata": {
+        "workflowEntityId": null,
+        "creator": {
+          "id": "a53bc1d0-c019-4df5-8a8c-71d55163fba9",
+          "type": "User",
+          "tenantId": "45e6435d-dc1c-42e3-89be-e72e6c8f072d"
+        },
+        "provisioningMethod": "FromDefinition",
+        "failureAlertSubscription": true,
+        "clientLastModifiedTime": "2019-08-01T23:25:21.9690565Z",
+        "flowclientsuspensionreason": "None",
+        "flowclientsuspensiontime": null,
+        "processAdvisorMetadata": null
+      },
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "Recurrence": {
+          "recurrence": {
+            "frequency": "Day",
+            "interval": 1,
+            "timeZone": "Pacific Standard Time",
+            "schedule": {
+              "hours": [
+                "3"
+              ]
+            }
+          },
+          "type": "Recurrence"
+        }
+      },
+      "actions": {
+        "Get_items": {
+          "runAfter": {},
+          "metadata": {
+            "flowSystemMetadata": {
+              "swaggerOperationId": "GetItems"
+            }
+          },
+          "type": "ApiConnection",
+          "inputs": {
+            "host": {
+              "connection": {
+                "name": "@parameters('$connections')['shared_sharepointonline']['connectionId']"
+              },
+              "api": {
+                "runtimeUrl": "https://flow-apim-msmanaged-na-eastus-01.azure-apim.net/apim/sharepointonline"
+              }
+            },
+            "method": "get",
+            "path": "/datasets/@{encodeURIComponent(encodeURIComponent('https://deltaairlines.sharepoint.com/sites/DL000555/wrskyclub/laxskyclub'))}/tables/@{encodeURIComponent(encodeURIComponent('5570cdf0-d198-40cb-ab70-f67cdb4ab9f5'))}/items",
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Apply_to_each": {
+          "foreach": "@body('Get_items')?['value']",
+          "actions": {
+            "Condition": {
+              "actions": {
+                "Create_item": {
+                  "runAfter": {},
+                  "metadata": {
+                    "flowSystemMetadata": {
+                      "swaggerOperationId": "PostItem"
+                    }
+                  },
+                  "type": "ApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connection": {
+                        "name": "@parameters('$connections')['shared_sharepointonline']['connectionId']"
+                      },
+                      "api": {
+                        "runtimeUrl": "https://flow-apim-msmanaged-na-eastus-01.azure-apim.net/apim/sharepointonline"
+                      }
+                    },
+                    "method": "post",
+                    "body": {
+                      "Title": "@items('Apply_to_each')?['Title']",
+                      "Received_x0020_Date_x0020_Time": "@items('Apply_to_each')?['Received_x0020_Date_x0020_Time']",
+                      "Location_x0020_Found": {
+                        "@@odata.type": "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference",
+                        "Value": "@items('Apply_to_each')?['Location_x0020_Found']?['Value']"
+                      },
+                      "Date_x0020__x0026__x0020_Time_x0": "@items('Apply_to_each')?['Date_x0020__x0026__x0020_Time_x0']",
+                      "BSO_x0020_Agent": "@items('Apply_to_each')?['BSO_x0020_Agent']",
+                      "Logged_x0020_By": {
+                        "@@odata.type": "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedUser",
+                        "Claims": "@items('Apply_to_each')?['Logged_x0020_By']?['DisplayName']"
+                      }
+                    },
+                    "path": "/datasets/@{encodeURIComponent(encodeURIComponent('https://deltaairlines.sharepoint.com/sites/DL000555/wrskyclub/laxskyclub'))}/tables/@{encodeURIComponent(encodeURIComponent('678ebe84-428a-4752-ab58-e6d35cfd9b6c'))}/items",
+                    "authentication": "@parameters('$authentication')"
+                  }
+                },
+                "Delete_item": {
+                  "runAfter": {
+                    "Create_item": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "flowSystemMetadata": {
+                      "swaggerOperationId": "DeleteItem"
+                    }
+                  },
+                  "type": "ApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connection": {
+                        "name": "@parameters('$connections')['shared_sharepointonline']['connectionId']"
+                      },
+                      "api": {
+                        "runtimeUrl": "https://flow-apim-msmanaged-na-eastus-01.azure-apim.net/apim/sharepointonline"
+                      }
+                    },
+                    "method": "delete",
+                    "path": "/datasets/@{encodeURIComponent(encodeURIComponent('https://deltaairlines.sharepoint.com/sites/DL000555/wrskyclub/laxskyclub'))}/tables/@{encodeURIComponent(encodeURIComponent('5570cdf0-d198-40cb-ab70-f67cdb4ab9f5'))}/items/@{encodeURIComponent(items('Apply_to_each')?['ID'])}",
+                    "authentication": "@parameters('$authentication')"
+                  }
+                }
+              },
+              "runAfter": {},
+              "expression": "@less(items('Apply_to_each')?['Received_x0020_Date_x0020_Time'], adddays(utcnow(), -30))",
+              "type": "If"
+            }
+          },
+          "runAfter": {
+            "Get_items": [
+              "Succeeded"
+            ]
+          },
+          "type": "Foreach"
+        }
+      },
+      "outputs": {}
+    },
+    "connectionReferences": {
+      "shared_sharepointonline": {
+        "connectionName": "shared-sharepointonl-99b1d8c1-f821-46cd-9276-0aeac780d361",
+        "source": "Embedded",
+        "id": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+        "tier": "NotSpecified"
+      }
+    },
+    "flowFailureAlertSubscribed": false,
+    "isManaged": false
+  }
+}
