@@ -66,7 +66,7 @@
               }
             },
             "method": "get",
-            "path": "/datasets/@{encodeURIComponent(encodeURIComponent('https://deltaairlines.sharepoint.com/sites/DL000555/wrskyclub/laxskyclub'))}/tables/@{encodeURIComponent(encodeURIComponent('5570cdf0-d198-40cb-ab70-f67cdb4ab9f5'))}/items",
+            "path": "/datasets/@{encodeURIComponent(encodeURIComponent('SOURCESITEURL'))}/tables/@{encodeURIComponent(encodeURIComponent('5570cdf0-d198-40cb-ab70-f67cdb4ab9f5'))}/items",
             "authentication": "@parameters('$authentication')"
           }
         },
@@ -105,12 +105,14 @@
                       "Logged_x0020_By": {
                         "@@odata.type": "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedUser",
                         "Claims": "@items('Apply_to_each')?['Logged_x0020_By']?['DisplayName']"
+                        
                       }
                     },
-                    "path": "/datasets/@{encodeURIComponent(encodeURIComponent('https://deltaairlines.sharepoint.com/sites/DL000555/wrskyclub/laxskyclub'))}/tables/@{encodeURIComponent(encodeURIComponent('678ebe84-428a-4752-ab58-e6d35cfd9b6c'))}/items",
+                    "path": "/datasets/@{encodeURIComponent(encodeURIComponent('SOURCESITEURL'))}/tables/@{encodeURIComponent(encodeURIComponent('678ebe84-428a-4752-ab58-e6d35cfd9b6c'))}/items",
                     "authentication": "@parameters('$authentication')"
                   }
                 },
+                
                 "Delete_item": {
                   "runAfter": {
                     "Create_item": [
@@ -133,7 +135,7 @@
                       }
                     },
                     "method": "delete",
-                    "path": "/datasets/@{encodeURIComponent(encodeURIComponent('https://deltaairlines.sharepoint.com/sites/DL000555/wrskyclub/laxskyclub'))}/tables/@{encodeURIComponent(encodeURIComponent('5570cdf0-d198-40cb-ab70-f67cdb4ab9f5'))}/items/@{encodeURIComponent(items('Apply_to_each')?['ID'])}",
+                    "path": "/datasets/@{encodeURIComponent(encodeURIComponent('SOURCESITEURL'))}/tables/@{encodeURIComponent(encodeURIComponent('5570cdf0-d198-40cb-ab70-f67cdb4ab9f5'))}/items/@{encodeURIComponent(items('Apply_to_each')?['ID'])}",
                     "authentication": "@parameters('$authentication')"
                   }
                 }
