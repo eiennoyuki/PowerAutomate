@@ -65,7 +65,7 @@
               "operationId": "GetItems"
             },
             "parameters": {
-              "dataset": "https://deltaairlines.sharepoint.com/sites/IFSFDLTeam",
+              "dataset": "https:sourcesite.com",
               "table": "e0d4fa12-674f-42c7-8534-fc08e8e9fc26",
               "$filter": "FAInitialDate eq '@{addtotime(utcnow(),-38,'day','yyyy-MM-dd')}'"
             },
@@ -134,7 +134,7 @@
               "operationId": "GetItems"
             },
             "parameters": {
-              "dataset": "https://deltaairlines.sharepoint.com/sites/IFSFDLTeam",
+              "dataset": "https:sourcesite.com",
               "table": "e0d4fa12-674f-42c7-8534-fc08e8e9fc26",
               "$filter": "Re_x002d_JoinDate eq '@{addtotime(utcnow(),3,'day','yyyy-MM-dd')}'"
             },
@@ -180,9 +180,9 @@
                   "operationId": "SendEmailV2"
                 },
                 "parameters": {
-                  "emailMessage/To": "mark.liv@delta.com;anna.perry@delta.com;Simone.N.Dawkins@delta.com;shelby.chilumuna@delta.com;Joni.Gagnon@delta.com;rexanne.spicer@delta.com;Christopher.George@delta.com;maria.nuguid@delta.com;natasha.clements@delta.com;azzizi.mobutu@delta.com;carissa.noriega@delta.com;Lavelle.Phillip@delta.com;denise.flood00@delta.com;justin.a.lee@delta.com;Jenelle.Brososky@delta.com",
+                  "emailMessage/To": "mark.liv@email.com",
                   "emailMessage/Subject": "@{formatdatetime(utcnow(),'ddMMMyy')} Reminder - Onboarding FSMs Graduating Soon",
-                  "emailMessage/Body": "<p>Notification Reminder for onboarding FSMs graduating Initial this week. &nbsp;Please reach out to congratulate everyone and make sure details are vetted (re-join curriculum date, etc.)<br>\n<a href=\"https://teams.microsoft.com/l/entity/26bc2873-6023-480c-a11b-76b66605ce8c/_djb2_msteams_prefix_1984092494?context=%7B%22subEntityId%22%3Anull%2C%22channelId%22%3A%2219%3A330d832937ef4e6bad521026da3fab3d%40thread.tacv2%22%7D&amp;groupId=23bfb347-bb36-4c2d-958b-a7c18dedf6ec&amp;tenantId=45e6435d-dc1c-42e3-89be-e72e6c8f072d\">MS Teams Master Tracking List</a><br>\n<br>\n@{outputs('CSS_Table_Style_INITIAL')}@{outputs('Replace_Carats_with_Spaces_INITIAL')}</p>",
+                  "emailMessage/Body": "<p>Notification Reminder for onboarding FSMs graduating Initial this week. &nbsp;Please reach out to congratulate everyone and make sure details are vetted (re-join curriculum date, etc.)<br>\n<a href=\"https://sourcesite.com">MS Teams Master Tracking List</a><br>\n<br>\n@{outputs('CSS_Table_Style_INITIAL')}@{outputs('Replace_Carats_with_Spaces_INITIAL')}</p>",
                   "emailMessage/Attachments": [
                     {
                       "Name": "Email_Template.oft",
@@ -212,7 +212,7 @@
                   "operationId": "GetFileContent"
                 },
                 "parameters": {
-                  "dataset": "https://deltaairlines.sharepoint.com/sites/IFSFDLTeam",
+                  "dataset": "https://sourcesite.com",
                   "id": "%252fShared%2bDocuments%252fPowerAutomate%252fCongratulations!%2b%2bWelcome%2bback%2bto%2bFDL%2bTraining!.oft",
                   "inferContentType": true
                 },
@@ -240,7 +240,7 @@
                     "operationId": "SendEmailV2"
                   },
                   "parameters": {
-                    "emailMessage/To": "mark.liv@delta.com",
+                    "emailMessage/To": "mark.liv@email.com",
                     "emailMessage/Subject": "@{formatdatetime(utcnow(),'ddMMMyy')} LENGTH_OF_GRAD_TABLE",
                     "emailMessage/Body": "<p>@{length(body('Create_HTML_Table'))}</p>"
                   },
@@ -344,9 +344,9 @@
                   "operationId": "SendEmailV2"
                 },
                 "parameters": {
-                  "emailMessage/To": "mark.liv@delta.com;anna.perry@delta.com;shelby.chilumuna@delta.com;Simone.N.Dawkins@delta.com;Joni.Gagnon@delta.com;rexanne.spicer@delta.com;maria.nuguid@delta.com;Christopher.George@delta.com;natasha.clements@delta.com;azzizi.mobutu@delta.com;carissa.noriega@delta.com;Lavelle.Phillip@delta.com;denise.flood00@delta.com;justin.a.lee@delta.com;Jenelle.Brososky@delta.com",
+                  "emailMessage/To": "mark.liv@email.com",
                   "emailMessage/Subject": "@{formatdatetime(utcnow(),'ddMMMyy')} Reminder - Onboarding FSMs Re-Joining Curriculum Soon",
-                  "emailMessage/Body": "<p>Notification Reminder that these FSMs are estimated to Re-Join onboarding curriculum soon. &nbsp;Please reach out to verify with each individuals.<br>\n<a href=\"https://teams.microsoft.com/l/entity/26bc2873-6023-480c-a11b-76b66605ce8c/_djb2_msteams_prefix_1984092494?context=%7B%22subEntityId%22%3Anull%2C%22channelId%22%3A%2219%3A330d832937ef4e6bad521026da3fab3d%40thread.tacv2%22%7D&amp;groupId=23bfb347-bb36-4c2d-958b-a7c18dedf6ec&amp;tenantId=45e6435d-dc1c-42e3-89be-e72e6c8f072d\">MS Teams Master Tracking List</a><br>\n<br>\n@{outputs('CSS_Table_Style_REJOIN')}@{outputs('Replace_Carat_With_Spaces_REJOIN')}</p>"
+                  "emailMessage/Body": "<p>Notification Reminder that these FSMs are estimated to Re-Join onboarding curriculum soon. &nbsp;Please reach out to verify with each individuals.<br>\n<a href=\"https://sourcesite.com">MS Teams Master Tracking List</a><br>\n<br>\n@{outputs('CSS_Table_Style_REJOIN')}@{outputs('Replace_Carat_With_Spaces_REJOIN')}</p>"
                 },
                 "authentication": "@parameters('$authentication')"
               }
@@ -372,7 +372,7 @@
                     "operationId": "SendEmailV2"
                   },
                   "parameters": {
-                    "emailMessage/To": "mark.liv@delta.com",
+                    "emailMessage/To": "mark.liv@email.com",
                     "emailMessage/Subject": "@{formatdatetime(utcnow(),'ddMMMyy')} LENGTH_OF_REJOIN_TABLE",
                     "emailMessage/Body": "<p>@{length(body('Create_HTML_table_2'))}</p>"
                   },
