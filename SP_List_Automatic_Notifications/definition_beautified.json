@@ -65,7 +65,7 @@
               "operationId": "GetItems"
             },
             "parameters": {
-              "dataset": "https:sourcesite.com",
+              "dataset": "SOURCESITEURL",
               "table": "e0d4fa12-674f-42c7-8534-fc08e8e9fc26",
               "$filter": "FAInitialDate eq '@{addtotime(utcnow(),-38,'day','yyyy-MM-dd')}'"
             },
@@ -134,7 +134,7 @@
               "operationId": "GetItems"
             },
             "parameters": {
-              "dataset": "https:sourcesite.com",
+              "dataset": "SOURCESITEURL",
               "table": "e0d4fa12-674f-42c7-8534-fc08e8e9fc26",
               "$filter": "Re_x002d_JoinDate eq '@{addtotime(utcnow(),3,'day','yyyy-MM-dd')}'"
             },
@@ -182,7 +182,7 @@
                 "parameters": {
                   "emailMessage/To": "mark.liv@email.com",
                   "emailMessage/Subject": "@{formatdatetime(utcnow(),'ddMMMyy')} Reminder - Onboarding FSMs Graduating Soon",
-                  "emailMessage/Body": "<p>Notification Reminder for onboarding FSMs graduating Initial this week. &nbsp;Please reach out to congratulate everyone and make sure details are vetted (re-join curriculum date, etc.)<br>\n<a href=\"https://sourcesite.com">MS Teams Master Tracking List</a><br>\n<br>\n@{outputs('CSS_Table_Style_INITIAL')}@{outputs('Replace_Carats_with_Spaces_INITIAL')}</p>",
+                  "emailMessage/Body": "<p>Notification Reminder for onboarding FSMs graduating Initial this week. &nbsp;Please reach out to congratulate everyone and make sure details are vetted (re-join curriculum date, etc.)<br>\n<a href=\"SOURCESITEURL">MS Teams Master Tracking List</a><br>\n<br>\n@{outputs('CSS_Table_Style_INITIAL')}@{outputs('Replace_Carats_with_Spaces_INITIAL')}</p>",
                   "emailMessage/Attachments": [
                     {
                       "Name": "Email_Template.oft",
@@ -212,7 +212,7 @@
                   "operationId": "GetFileContent"
                 },
                 "parameters": {
-                  "dataset": "https://sourcesite.com",
+                  "dataset": "SOURCESITEURL",
                   "id": "%252fShared%2bDocuments%252fPowerAutomate%252fCongratulations!%2b%2bWelcome%2bback%2bto%2bFDL%2bTraining!.oft",
                   "inferContentType": true
                 },
@@ -346,7 +346,7 @@
                 "parameters": {
                   "emailMessage/To": "mark.liv@email.com",
                   "emailMessage/Subject": "@{formatdatetime(utcnow(),'ddMMMyy')} Reminder - Onboarding FSMs Re-Joining Curriculum Soon",
-                  "emailMessage/Body": "<p>Notification Reminder that these FSMs are estimated to Re-Join onboarding curriculum soon. &nbsp;Please reach out to verify with each individuals.<br>\n<a href=\"https://sourcesite.com">MS Teams Master Tracking List</a><br>\n<br>\n@{outputs('CSS_Table_Style_REJOIN')}@{outputs('Replace_Carat_With_Spaces_REJOIN')}</p>"
+                  "emailMessage/Body": "<p>Notification Reminder that these FSMs are estimated to Re-Join onboarding curriculum soon. &nbsp;Please reach out to verify with each individuals.<br>\n<a href=\"SOURCESITEURL">MS Teams Master Tracking List</a><br>\n<br>\n@{outputs('CSS_Table_Style_REJOIN')}@{outputs('Replace_Carat_With_Spaces_REJOIN')}</p>"
                 },
                 "authentication": "@parameters('$authentication')"
               }
