@@ -5,7 +5,7 @@
     "description": "Power Automate Flow that sends out daily emails based on condition of column date values.",
     "createdTime": "2022-05-20T01:59:19.1358363Z",
     "packageTelemetryId": "aaf503c6-c92f-47cf-bd00-ac6d8f49a37c",
-    "creator": "N/A",
+    "creator": "MarkLiv",
     "sourceEnvironment": ""
   },
   "resources": {
@@ -43,7 +43,7 @@
       "suggestedCreationType": "Existing",
       "creationType": "Existing",
       "details": {
-        "displayName": "mark.liv@delta.com",
+        "displayName": "mark.liv@email.com",
         "iconUri": "https://az818438.vo.msecnd.net/icons/sharepointonline.png"
       },
       "configurableBy": "User",
@@ -70,7 +70,7 @@
       "suggestedCreationType": "Existing",
       "creationType": "Existing",
       "details": {
-        "displayName": "mark.liv@delta.com",
+        "displayName": "mark.liv@email.com",
         "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1538/1.0.1538.2621/office365/icon.png"
       },
       "configurableBy": "User",
